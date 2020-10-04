@@ -1,5 +1,22 @@
 # main.tf
 
+# Customise here
+
+locals {
+  s3_bucket_name = "a1b2c3-ecs-${random_pet.s3_bucket_name.id}"
+  instance_type  = "t2.micro"
+  name           = "ali-fay-demo"
+  environment    = "dev"
+  resources_name = "${local.name}-${local.environment}"
+  tags = {
+    Terraform   = "true"
+    Environment = "${local.environment}"
+    Client      = "${local.name}"
+  }
+}
+
+#####
+
 terraform {
   required_providers {
     aws = {
@@ -16,18 +33,6 @@ resource "random_pet" "s3_bucket_name" {
   length = 2
 }
 
-locals {
-  s3_bucket_name = "a1b2c3-ecs-${random_pet.s3_bucket_name.id}"
-  instance_type  = "t2.micro"
-  name           = "ali-fay-demo"
-  environment    = "dev"
-  resources_name = "${local.name}-${local.environment}"
-  tags = {
-    Terraform   = "true"
-    Environment = "${local.environment}"
-    Client      = "${local.name}"
-  }
-}
 
 output "alb_endpoint" {
   description = "FQDN of ALB for ECS"

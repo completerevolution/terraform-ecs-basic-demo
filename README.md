@@ -22,11 +22,19 @@ Contained in this repository is a basic AWS ECS architecture demonstrating the f
 -   Configuring both ALB and ECS to map port 80 (public to ALB) to 8080 (ALB to host) to 80 (host to container)
 -   Nginx container has `s3:PutObject` rights via policy & role
 
-### _Known limitations_ (in line with original assignment)
+### _Customisation_
+
+The first section of `main.tf` includes some local variables that can be changed (instance type, etc.).
+The S3 bucket name is dynamically generated to avoid clashes.
+
+### _Known limitations_
+
+(outside of the original assignment)
 
 -   There is no KMS support
 -   Local `tfstate` file
 -   EC2 hosts lack SSH key
+-   IP range is hardcoded
 -   Dozens of others out of scope for the assignement
 
 ### _Instructions_
